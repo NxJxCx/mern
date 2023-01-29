@@ -22,10 +22,14 @@ function DisplayStudents(props) {
       const hostname = `http://${window.location.hostname}:4000/studentprofiles`;
       axios.get(hostname)
         .then(res => {
-          setStudentData(res.data);
-          if (fgloadbtn.current && loadIsOpen) {
-            fgloadbtn.current.click();
-            setLoadIsOpen(false);
+          if (res.data.error) {
+            setStudentData([]);
+          } else {
+            setStudentData(res.data);
+            if (fgloadbtn.current && loadIsOpen) {
+              fgloadbtn.current.click();
+              setLoadIsOpen(false);
+            }
           }
         })
         .catch(err => {
@@ -37,7 +41,7 @@ function DisplayStudents(props) {
         });
     }
 
-    if (!studentData.length && !loadIsOpen) {
+    if (studentData === null && !loadIsOpen) {
       setLoadIsOpen(true);
       if (openLoadbtn.current && !studentData.length) {
         const loadbtn = openLoadbtn.current;

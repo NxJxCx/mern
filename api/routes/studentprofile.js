@@ -96,7 +96,6 @@ router.delete('/:id', (req, res, next) => {
   }
   StudentProfileModel.findByIdAndRemove(req.params.id)
   .then(data => {
-    console.log(data);
     if (!data) {
       res.status(400).send({error: `Error: Failed to delete student profile id ${req.params.id} from database`});
     } else {

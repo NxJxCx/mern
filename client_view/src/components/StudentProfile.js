@@ -44,23 +44,21 @@ function StudentProfile(props) {
                         }
                       });
                     }
-                  }, 500);
+                  }, 200);
                 }
                 break;
               }
             }
-            setTimeout(() => {
-              [...formRefer.current].forEach(it => {
-                if (it.name && dt[it.name])
-                  it.value = dt[it.name];
-              });
-            }, 1000, []);
           }
           const backdrop = document.getElementsByClassName('modal-backdrop show');
           if (backdrop.length > 0) {
             for (let ib = 0; ib < backdrop.length; ib++)  { 
               backdrop[ib].remove();
             }
+            setTimeout(() => {
+              document.body.classList.remove('modal-open');
+              document.body.style.overflow = null;
+            }, 500);
           }
           if (loadBtn.current) {
             loadBtn.current.click();
@@ -151,7 +149,7 @@ function StudentProfile(props) {
           <div className="row content bg-dark">
             <div className="container">
               <div className="text-center">
-                <button className="btn border-5 border-light bg-light m-2 text-primary" onClick={(e) => {
+                <button className="btn border-5 border-light bg-light m-2 text-primary" onClick={() => {
                   setHasMessage({});
                   [...formRefer.current].forEach(inp => {
                     if (inp.name && studentData[inp.name] && "" + inp.value !==  "" + studentData[inp.name]) {
@@ -174,23 +172,23 @@ function StudentProfile(props) {
                         <div className="row form-group p-2">
                           <label htmlFor="firstname" className="col-sm-2 col-form-label fw-bolder">First Name: </label>
                           <div className="col-sm-10">
-                           <input type="text" readOnly={!isUpdating} name="firstname" className={isUpdating ? "form-control" : "form-control fw-bold"} placeholder={studentData.firstname}/>
+                           <input type="text" readOnly={!isUpdating} name="firstname" className={isUpdating ? "form-control fw-bold" : "form-control-plaintext"} placeholder={studentData.firstname}/>
                           </div>
                         </div>
                         <div className="row form-group p-2">
                           <label htmlFor="lastname" className="col-sm-2 col-form-label fw-bolder">Last Name: </label>
                           <div className="col-sm-10">
-                          <input type="text" readOnly={!isUpdating} name="lastname" className={isUpdating ? "form-control" : "form-control fw-bold"} placeholder={studentData.lastname}/>
+                          <input type="text" readOnly={!isUpdating} name="lastname" className={isUpdating ? "form-control fw-bold" : "form-control-plaintext"} placeholder={studentData.lastname}/>
                           </div>
                         </div>
                         <div className="row form-group p-2">
                           <label htmlFor="course" className="col-sm-2 col-form-label fw-bolder">Course: </label>
                           <div className="col-sm-8">
-                          <input type="text" readOnly={!isUpdating} name="course" className={isUpdating ? "form-control" : "form-control fw-bold"} placeholder={studentData.course}/>
+                          <input type="text" readOnly={!isUpdating} name="course" className={isUpdating ? "form-control fw-bold" : "form-control-plaintext"} placeholder={studentData.course}/>
                           </div>
                           <label htmlFor="year" className="col-sm-1 col-form-label fw-bolder">Year: </label>
                           <div className="col-sm-1">
-                            <select name="year" className={isUpdating ? "form-control text-center bg-white" : "form-control text-center bg-white fw-bold"} style={{fontFamily: 'Droid Sans'}} readOnly={!isUpdating} disabled={!isUpdating}>
+                            <select name="year" className={isUpdating ? "form-control text-center bg-white fw-bold" : "form-control text-center bg-white fs-5 border-0"} style={{fontFamily: 'Droid Sans'}} readOnly={!isUpdating} disabled={!isUpdating}>
                               <option value="1">I</option>
                               <option value="2">II</option>
                               <option value="3">III</option>
@@ -210,7 +208,6 @@ function StudentProfile(props) {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
           <div className="row footer bg-light">
@@ -220,7 +217,7 @@ function StudentProfile(props) {
             {hasMessage.success ? <Toaster title="Update Student Profile" message="Updated Successfully!" /> : null}
             {hasMessage.error ? <Toaster title="Update Student Profile" message="Failed to Update Student Information!" /> : null}
           </div>
-          {/*  <!-- Modal --> */}
+          {/* <!-- Modal --> */}
           <FgLoading refer={loadBtn}/>
         </div>
       </div>
