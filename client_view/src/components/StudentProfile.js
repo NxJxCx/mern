@@ -29,11 +29,23 @@ function StudentProfile(props) {
             if (!isError)
               setIsError(true);
           } else {
-            for (let ii = 0; ii < dt.length; ii++) {
+            for (const ii = 0; ii < dt.length; ii++) {
               if (dt[ii]._id === id) {
-                setStudentData(dt[ii]);
-                if (isError)
-                  setIsError(false);
+                if (!JSON.stringify(studentData) || (JSON.stringify(studentData) !== JSON.stringify(dt[ii]))) {
+                  setStudentData(dt[ii]);
+                  if (isError) {
+                    setIsError(false);
+                  }
+                  setTimeout(() => {
+                    if (formRefer.current) {
+                      [...formRefer.current].forEach(inp => {
+                        if (inp.name && dt[ii][inp.name]) {
+                          inp.value = dt[ii][inp.name];
+                        }
+                      });
+                    }
+                  }, 500);
+                }
                 break;
               }
             }
@@ -66,7 +78,7 @@ function StudentProfile(props) {
     }
     const interval = setInterval(getDataFromAPI, 1000);
     return () => clearInterval(interval);
-  }, [id, studentData, loadBtn, isError, setStudentData, setIsError]);
+  }, [id, studentData, loadBtn, isError, formRefer, setStudentData, setIsError]);
 
   const pen = (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pen" viewBox="0 0 16 16">
