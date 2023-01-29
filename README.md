@@ -75,9 +75,3 @@ npm run dev
 > - For database connection/access through terminal or shell, download [MongoDB Shell](https://www.mongodb.com/try/download/shell)
 > - For database connection/access through GUI download [MongoDB Compass](https://www.mongodb.com/try/download/compass).
 
-
-### To Build Production / Web Deployment on the Internet:
-```bash
-cd client_view
-npm build
-```
