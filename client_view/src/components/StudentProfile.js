@@ -114,7 +114,6 @@ function StudentProfile(props) {
             setStudentData({});
             setHasMessage({error: true});
           } else {
-            console.log(response.data);
             setStudentData(Object.assign({}, response.data));
             setHasMessage({success: true});
           }
@@ -145,8 +144,9 @@ function StudentProfile(props) {
             <div className="container">
               <div className="text-center">
                 <button className="btn border-5 border-light bg-light m-2 text-primary" onClick={(e) => {
+                  setHasMessage({});
                   [...formRefer.current].forEach(inp => {
-                    if (inp.name && studentData[inp.name]) {
+                    if (inp.name && studentData[inp.name] && "" + inp.value !==  "" + studentData[inp.name]) {
                       inp.value = studentData[inp.name];
                     }
                   });
