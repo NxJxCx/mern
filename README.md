@@ -25,8 +25,8 @@ git clone https://github.com/NxJxCx/mern.git
 - `client_view/public/**` - You can add or modify `css` and `js` and/or `assets` folders for local resources
 - `client_view/src/App.js` - Add or modify `<Route />` tag inside this file for front-end routes
 - `client_view/src/App.css` - Modify this file for default App's css styles
-- `client_view/src/components/*.js` - Add/Modify/Edit any `*.js` files inside `api/components/` folder for page displays
-- `client_view/src/components/*.css` - Add/Modify/Edit any `*.css` files inside `api/components/` folder for reactjs component page styles imports inside `*.js` files
+- `client_view/src/components/*.js` - Add/Modify/Edit any `*.js` files inside `client_view/src/components/` folder for page displays
+- `client_view/src/components/*.css` - Add/Modify/Edit any `*.css` files inside `client_view/src/components/` folder for reactjs component page styles imports inside `*.js` files
 
 **Back-End(API/Database) (api)**
 - `api/app.js` - Add lines like `app.use("/myroute", myroute);` where `myroute` is an express router imported from `api/routes` folder
