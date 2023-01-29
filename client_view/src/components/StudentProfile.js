@@ -29,7 +29,7 @@ function StudentProfile(props) {
             if (!isError)
               setIsError(true);
           } else {
-            for (const ii = 0; ii < dt.length; ii++) {
+            for (let ii = 0; ii < dt.length; ii++) {
               if (dt[ii]._id === id) {
                 if (!JSON.stringify(studentData) || (JSON.stringify(studentData) !== JSON.stringify(dt[ii]))) {
                   setStudentData(dt[ii]);
