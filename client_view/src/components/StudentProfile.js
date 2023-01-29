@@ -133,6 +133,14 @@ function StudentProfile(props) {
       }
   };
 
+  const onSubmitClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isUpdating) {
+      onClickUpdate(e);
+    }
+  };
+
   if (id && studentData._id) {
     return (
       <div className="box">
@@ -161,13 +169,7 @@ function StudentProfile(props) {
                       <h3 className="card-title">{studentData.firstname} {studentData.lastname}</h3>
                     </div>
                     <div className="card-body">
-                      <form noValidate ref={formRefer} onSubmit={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if (isUpdating) {
-                          onClickUpdate(e);
-                        }
-                      }}>
+                      <form noValidate ref={formRefer} onSubmit={onSubmitClick}>
                         <input type="hidden" name="_id" value={studentData._id} />
                         <div className="row form-group p-2">
                           <label htmlFor="firstname" className="col-sm-2 col-form-label fw-bolder">First Name: </label>
@@ -218,9 +220,9 @@ function StudentProfile(props) {
             {hasMessage.success ? <Toaster title="Update Student Profile" message="Updated Successfully!" /> : null}
             {hasMessage.error ? <Toaster title="Update Student Profile" message="Failed to Update Student Information!" /> : null}
           </div>
+          {/*  <!-- Modal --> */}
+          <FgLoading refer={loadBtn}/>
         </div>
-        {/*  <!-- Modal --> */}
-        <FgLoading refer={loadBtn}/>
       </div>
     );
   }
@@ -228,17 +230,18 @@ function StudentProfile(props) {
     return (
       <div className="box">
         <div className="box-container">
-        <div className="row header">
-          <Header title={props.title} path="/"/>
-        </div>
-        </div>
-        <div className="row content bg-dark">
-          <div className="container">
-            <FgLoading isOpen={true}/>
+          <div className="row header">
+            <Header title={props.title} path="/"/>
           </div>
-        </div>
-        <div className="row footer bg-light">
-          <Footer />
+          <div className="row content bg-dark">
+            <div className="container">
+              
+            </div>
+          </div>
+          <div className="row footer bg-light">
+            <Footer />
+          </div>
+          <FgLoading isOpen={true}/>
         </div>
       </div>
     );
